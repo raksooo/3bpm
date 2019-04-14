@@ -17,8 +17,8 @@
   "homepage": "https://github.com/raksooo/3box-password-manager#readme",
   "devDependencies": {
     "@babel/core": "^7.4.3",
-    "@babel/plugin-proposal-decorators": "^7.4.0",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-proposal-decorators": "^7.4.0",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
@@ -28,18 +28,11 @@
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
+    "3box-react-hooks": "^1.0.0",
+    "@babel/polyfill": "^7.4.3",
     "autobind-decorator": "^2.4.0",
+    "babel-runtime": "^6.26.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      ["@babel/plugin-proposal-decorators", { "legacy": true }],
-      ["@babel/plugin-proposal-class-properties", { "loose" : true }]
-    ]
   }
 }
