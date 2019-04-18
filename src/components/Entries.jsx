@@ -3,6 +3,7 @@ import React from 'react';
 const Entries = (props) => {
   const {
     space,
+    entrySelected,
   } = props;
 
   if (space == null) {
@@ -10,9 +11,9 @@ const Entries = (props) => {
   }
 
   return (
-		<div>
+		<>
 			Authenticated!
-		</div>
+		</>
 	);
 };
 
