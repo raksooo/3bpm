@@ -12,7 +12,7 @@ const EntryInput = ({ entry, name, props, setEntry }) => {
   return <Input {...inputProps} />;
 };
 
-const Entry = ({ id, entry: selectedEntry, saveEntry }) => {
+const Entry = ({ entry: selectedEntry, saveEntry }) => {
   const [entry, setEntry] = useState({});
 
   useEffect(() => {

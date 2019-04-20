@@ -43,7 +43,7 @@ const Page = (props) => {
       { space != null && (
         <>
           <Entries space={space} id={id} pickId={pickId} />
-          <Entry id={id} entry={entry} saveEntry={saveEntry} />
+          <Entry entry={entry} saveEntry={saveEntry} />
           <button onClick={clearEntry}>Clear</button>
           <button onClick={() => console.log(space.private.log)}>log</button>
         </>
