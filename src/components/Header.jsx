@@ -7,7 +7,7 @@ import styles from '../styles/Header.less';
 const Header = ({ space, openSpace }) => {
   return (
     <header className={styles.header}>
-			<h1 className={styles.brand}>3bpm</h1>
+			<h1 className={styles.brand}>3BPM</h1>
       <Profile space={space} />
 			<button
 					className={classNames(styles.authenticate, space == null && styles.opaque)}

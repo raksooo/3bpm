@@ -1,0 +1,69 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  display: block;
+  flex: 1;
+  background: transparent;
+  border: 0px #cfd8dc solid;
+  border-bottom-width: 1px;
+  margin-bottom: 1em;
+  height: 2em;
+  line-height: 2em;
+  padding: 0 0.5em;
+}
+
+.buttons {
+  display: flex;
+  flex: 1;
+}
+
+.button {
+  display: block;
+  width: 50%;
+  text-align: center;
+  background: none;
+  border: 1px transparent solid;
+  line-height: 2em;
+  cursor: pointer;
+
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+.save {
+  .button;
+
+  color: white;
+  background: #26a69a;
+  border-width: 0;
+  margin-right: 1em;
+
+  &:hover {
+    background: #4db6ac;
+  }
+
+  &:active {
+    background: #26a69a;
+  }
+}
+
+.delete {
+  .button;
+
+  border-color: #d84315;
+  color: #d84315;
+
+  &:hover {
+    background: #fbe9e7;
+  }
+
+  &:active {
+    background: #ffccbc;
+  }
+}
+

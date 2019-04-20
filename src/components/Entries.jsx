@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import classNames from 'classnames';
+
+import styles from '../styles/Entries.less';
 
 const getEntries = async (space, index) => {
   const resultPromises = (await index.entries())
@@ -7,19 +10,21 @@ const getEntries = async (space, index) => {
   return await Promise.all(resultPromises);
 };
 
-const EntryItem = ({ id, entry, pickId }) => {
+const EntryItem = ({ id, entry, pickId, selected }) => {
   const onClick = useCallback(() => {
     pickId(id);
   }, [id, pickId]);
 
   return (
-    <li onClick={onClick}>
+    <li 
+        onClick={onClick}
+        className={classNames(styles.item, selected && styles.selected)}>
       {entry.site.value}
     </li>
   );
 };
 
-const Entries = ({ space, index, id, pickId }) => {
+const Entries = ({ space, index, id: selectedId, pickId }) => {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
@@ -27,14 +32,20 @@ const Entries = ({ space, index, id, pickId }) => {
       const entries = await getEntries(space, index);
       setEntries(entries);
     })();
-  }, [space, index, id]);
+  }, [space, index, selectedId]);
 
   const listItems = entries
-    .map(([id, entry]) => ({ key: id, id, entry, pickId }))
+    .map(([id, entry]) => ({
+      key: id,
+      id,
+      entry,
+      pickId,
+      selected: selectedId === id,
+    }))
     .map(props => <EntryItem {...props} />);
 
   return (
-    <ul>
+    <ul className={styles.list}>
       {listItems}
     </ul>
   );

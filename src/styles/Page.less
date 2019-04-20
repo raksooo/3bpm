@@ -1,3 +1,5 @@
+@import './responsive';
+
 .parallaxContainer {
   perspective: 1px;
   transform-style: preserve-3d;
@@ -11,5 +13,64 @@
   position: relative;
   background-color: white;
   z-index: 1;
+  min-height: 90vh;
+}
+
+.content {
+  display: flex;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.side {
+  width: 50%;
+  padding: 20px 30px;
+}
+
+.leftSide {
+  .side;
+
+  margin-left: 40px;
+  border-right: 2px #b2dfdb solid;
+
+  .responsive-large({
+    margin-left: 200px;
+  });
+}
+
+.rightSide {
+  .side;
+
+  margin-right: 40px;
+
+  .responsive-large({
+    margin-right: 200px;
+  });
+}
+
+.add {
+  display: block;
+  width: 100%;
+  padding: 0.5em 1em;
+  border: none;
+  border-left: 2px transparent solid;
+  background: transparent;
+  cursor: pointer;
+  color: black;
+  text-align: left;
+  font-style: italic;
+
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+
+  &:hover {
+    border-color: #80cbc4;
+  }
+}
+
+.selected {
+  background: #e0f2f1;
 }
 

@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
+import classNames from 'classnames';
 import { useDelayedSpace } from '3box-react-hooks';
 import uuid from 'uuid/v4';
 import { clone } from '../helpers/objectHelper';
@@ -14,7 +15,7 @@ const defaultEntry = () => clone({
   site: { type: 'text', value: '' },
   username: { type: 'text', value: '' },
   password: { type: 'password', value: '' },
-  other: { type: 'textarea', value: '' },
+  other: { type: 'text', value: '' },
 });
 
 const Page = (props) => {
@@ -63,12 +64,21 @@ const Page = (props) => {
     <div ref={scrollContainer} className={styles.parallaxContainer}>
       <Header space={space} openSpace={openSpace} />
       { space != null && (
-        <main className={styles.parallaxContent}>
-          <Entries space={space} index={index} id={id} pickId={pickId} />
-          <Entry entry={entry} saveEntry={saveEntry} deleteEntry={deleteEntry} />
-          <button onClick={clearEntry}>Clear</button>
-          {Array(50).fill(<br />)}
-        </main>
+        <div className={styles.parallaxContent}>
+          <main className={styles.content}>
+            <section className={styles.leftSide}>
+              <button
+                  onClick={clearEntry}
+                  className={classNames(styles.add, id == null && styles.selected)}>
+                + New
+              </button>
+              <Entries space={space} index={index} id={id} pickId={pickId} />
+            </section>
+            <section className={styles.rightSide}>
+              <Entry entry={entry} saveEntry={saveEntry} deleteEntry={deleteEntry} />
+            </section>
+          </main>
+        </div>
       )}
     </div>
   );

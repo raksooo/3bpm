@@ -21,7 +21,7 @@
 .brand {
 	display: block;
 	margin: 0 0 20px;
-	font-size: 6em;
+	font-size: 5.5em;
 }
 
 .authenticate {
@@ -35,6 +35,11 @@
 	font-weight: bold;
 	opacity: 0;
 	transition: opacity 1s linear;
+
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
 
 	&:hover {
 		background: #4db6ac;
