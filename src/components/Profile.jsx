@@ -1,33 +1,26 @@
 import React, { useEffect } from 'react';
+import classNames from 'classnames';
 import { useProfile } from '3box-react-hooks';
 import { makeGenitive } from '../helpers/stringHelper';
 
-const Profile = ({ space, openSpace }) => {
+import styles from '../styles/Profile.less';
+
+const Profile = ({ space }) => {
   const profile = useProfile();
 
-  const genitiveName = profile != null && profile.name != null
-    ? makeGenitive(profile.name)
-    : null;
-
   return (
-    <>
-      {profile != null && (
-        <>
-          <span>
-            {profile.emoji}
-          </span>
-          <span>
-            {genitiveName}
-          </span>
-          <span>
-            &nbsp;secret password stash
-          </span>
-        </>
-      )}
-      {space == null && (
-        <button onClick={openSpace}>Authenticate</button>
-      )}
-    </>
+    <h2 className={classNames(styles.title, space != null && styles.opaque)}>
+			{profile != null && profile.name != null && (
+				<>
+					<span>
+						{makeGenitive(profile.name)}
+					</span>
+					<span>
+						&nbsp;secret password stash
+					</span>
+				</>
+			)}
+    </h2>
   );
 };
 

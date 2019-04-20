@@ -8,6 +8,25 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader']
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader",
+            query: {
+              sourceMap: true,
+              modules: true,
+              localIdentName: "[local]__[hash:base64:5]"
+            }
+          },
+          {
+            loader: "less-loader"
+          }
+        ]
       }
     ]
   },
@@ -24,7 +43,7 @@ module.exports = {
   ],
   devServer: {
     contentBase: './dist',
-		hot: true
+    hot: true
   }
 };
 

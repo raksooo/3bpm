@@ -1,13 +1,14 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDelayedSpace } from '3box-react-hooks';
 import uuid from 'uuid/v4';
 import { clone } from '../helpers/objectHelper';
 import { SPACE_NAME } from '../constants';
 import Index from '../EntryIndex';
 import Header from './Header';
-import Profile from './Profile';
 import Entries from './Entries';
 import Entry from './Entry'
+
+import styles from '../styles/Page.less';
 
 const defaultEntry = () => clone({
   site: { type: 'text', value: '' },
@@ -21,6 +22,14 @@ const Page = (props) => {
   const [id, setId] = useState(null);
   const [entry, setEntry] = useState(defaultEntry());
   const index = useMemo(() => new Index(space), [space]);
+	const scrollContainer = useRef();
+
+  useEffect(() => {
+    scrollContainer.current.scroll({
+			top: Math.round(window.innerHeight/2), 
+			behavior: 'smooth'
+		});
+  }, [space]);
 
   const saveEntry = useCallback(async entry => {
     const key = id || uuid();
@@ -51,18 +60,17 @@ const Page = (props) => {
   });
 
   return (
-    <>
-      <Header>
-        <Profile space={space} openSpace={openSpace} />
-      </Header>
+    <div ref={scrollContainer} className={styles.parallaxContainer}>
+      <Header space={space} openSpace={openSpace} />
       { space != null && (
-        <>
+        <main className={styles.parallaxContent}>
           <Entries space={space} index={index} id={id} pickId={pickId} />
           <Entry entry={entry} saveEntry={saveEntry} deleteEntry={deleteEntry} />
           <button onClick={clearEntry}>Clear</button>
-        </>
+          {Array(50).fill(<br />)}
+        </main>
       )}
-    </>
+    </div>
   );
 };
 
