@@ -3,11 +3,7 @@ import { useProfile, useDelayedSpace } from '3box-react-hooks';
 import { SPACE_NAME } from '../constants';
 import { makeGenitive } from '../helpers/stringHelper'
 
-const Profile = (props) => {
-  const {
-    setSpace,
-  } = props;
-
+const Profile = ({ setSpace }) => {
   const profile = useProfile();
   const [space, openSpace] = useDelayedSpace(SPACE_NAME);
 

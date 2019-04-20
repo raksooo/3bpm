@@ -1,31 +1,36 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import Input from './Input';
+import { capitalize } from '../helpers/stringHelper';
 
-const Entry = (props) => {
-  const {
-    space,
-    entry,
-  } = props;
+const EntryInput = ({ entry, name, props, setEntry }) => {
+  const onChange = useCallback(value => {
+    entry[name].value = value;
+    setEntry(entry);
+  }, [entry, name]);
 
-  if (space == null) {
-    return null;
-  }
+  const inputProps = { ...props, onChange, placeholder: capitalize(name) };
+  return <Input {...inputProps} />;
+};
 
-  const siteRef = useRef(null);
-  const usernameRef = useRef(null);
-  const passwordRef = useRef(null);
-  const commentRef = useRef(null);
+const Entry = ({ id, entry: selectedEntry, saveEntry }) => {
+  const [entry, setEntry] = useState({});
 
-  const saveEntry = useCallback(() => {
-    // TODO
-  }, [siteRef, usernameRef, passwordRef, commentRef]);
+  useEffect(() => {
+    setEntry(selectedEntry);
+  }, [selectedEntry]);
+
+  const saveLocalEntry = useCallback(() => {
+    saveEntry(selectedEntry);
+  });
+
+  const inputs = Object.entries(entry)
+    .map(([name, props]) => ({ key: name, entry, name, props, setEntry }))
+    .map(props => <EntryInput {...props} />);
 
   return (
     <>
-      <input type="text" ref={siteRef} placeholder="Site" />
-      <input type="text" ref={siteRef} placeholder="Username" />
-      <input type="password" ref={siteRef} placeholder="Password" />
-      <textarea ref={commentRef} placeholder="Comment"></textarea>
-      <button onClick={saveEntry}>
+      {inputs}
+      <button onClick={saveLocalEntry}>
         Save
       </button>
     </>
