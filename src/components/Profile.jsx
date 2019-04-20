@@ -1,17 +1,9 @@
 import React, { useEffect } from 'react';
-import { useProfile, useDelayedSpace } from '3box-react-hooks';
-import { SPACE_NAME } from '../constants';
-import { makeGenitive } from '../helpers/stringHelper'
+import { useProfile } from '3box-react-hooks';
+import { makeGenitive } from '../helpers/stringHelper';
 
-const Profile = ({ setSpace }) => {
+const Profile = ({ space, openSpace }) => {
   const profile = useProfile();
-  const [space, openSpace] = useDelayedSpace(SPACE_NAME);
-
-  useEffect(() => {
-    if (space != null) {
-      setSpace(space);
-    }
-  }, [space]);
 
   const genitiveName = profile != null && profile.name != null
     ? makeGenitive(profile.name)

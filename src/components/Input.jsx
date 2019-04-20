@@ -12,7 +12,7 @@ const Input = ({ type = "text", ...props }) => {
     if (typeof props.onChange === 'function') {
       props.onChange(event.target.value);
     }
-  });
+  }, [props.onChange]);
 
   const commonProps = {
     ...props,

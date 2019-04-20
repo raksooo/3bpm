@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useMemo } from 'react';
+import { useDelayedSpace } from '3box-react-hooks';
 import uuid from 'uuid/v4';
 import { clone } from '../helpers/objectHelper';
+import { SPACE_NAME } from '../constants';
 import Index from '../EntryIndex';
 import Header from './Header';
 import Profile from './Profile';
@@ -15,7 +17,7 @@ const defaultEntry = () => clone({
 });
 
 const Page = (props) => {
-  const [space, setSpace] = useState(null);
+  const [space, openSpace] = useDelayedSpace(SPACE_NAME);
   const [id, setId] = useState(null);
   const [entry, setEntry] = useState(defaultEntry());
   const index = useMemo(() => new Index(space), [space]);
@@ -51,7 +53,7 @@ const Page = (props) => {
   return (
     <>
       <Header>
-        <Profile setSpace={setSpace} />
+        <Profile space={space} openSpace={openSpace} />
       </Header>
       { space != null && (
         <>
