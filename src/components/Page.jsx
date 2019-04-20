@@ -1,32 +1,45 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import uuid from 'uuid/v4';
+import { clone } from '../helpers/objectHelper';
+import Index from '../EntryIndex';
 import Header from './Header';
 import Profile from './Profile';
 import Entries from './Entries';
 import Entry from './Entry'
 
-const defaultEntry = {
+const defaultEntry = () => clone({
   site: { type: 'text', value: '' },
   username: { type: 'text', value: '' },
   password: { type: 'password', value: '' },
   other: { type: 'textarea', value: '' },
-};
+});
 
 const Page = (props) => {
   const [space, setSpace] = useState(null);
   const [id, setId] = useState(null);
-  const [entry, setEntry] = useState(defaultEntry);
+  const [entry, setEntry] = useState(defaultEntry());
+  const index = useMemo(() => new Index(space), [space]);
 
   const saveEntry = useCallback(async entry => {
     const key = id || uuid();
     await space.private.set(key, entry);
+    await index.add(key);
     setId(key);
     setEntry(entry);
   }, [space, id]);
 
+  const deleteEntry = useCallback(async () => {
+    if (id != null) {
+      await space.private.remove(id);
+      await index.remove(id);
+      setId(null);
+      setEntry(defaultEntry());
+    }
+  }, [id]);
+
   const clearEntry = useCallback(() => {
     setId(null);
-    setEntry(defaultEntry);
+    setEntry(defaultEntry());
   });
 
   const pickId = useCallback(id => {
@@ -42,10 +55,9 @@ const Page = (props) => {
       </Header>
       { space != null && (
         <>
-          <Entries space={space} id={id} pickId={pickId} />
-          <Entry entry={entry} saveEntry={saveEntry} />
+          <Entries space={space} index={index} id={id} pickId={pickId} />
+          <Entry entry={entry} saveEntry={saveEntry} deleteEntry={deleteEntry} />
           <button onClick={clearEntry}>Clear</button>
-          <button onClick={() => console.log(space.private.log)}>log</button>
         </>
       )}
     </>

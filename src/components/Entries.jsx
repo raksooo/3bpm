@@ -1,15 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-const getEntries = async (space) => {
-  const resultPromises = await space.private.log
-    .map(({ key }) => key)
-    .filter(key => typeof key === 'string')
-    .filter((key, i, keys) => keys.indexOf(key) >= i)
+const getEntries = async (space, index) => {
+  const resultPromises = (await index.entries())
     .map(async (key) => [key, await space.private.get(key)]);
 
-  const entries = await Promise.all(resultPromises);
-  return entries
-    .filter(([_, value]) => typeof value === 'object');
+  return await Promise.all(resultPromises);
 };
 
 const EntryItem = ({ id, entry, pickId }) => {
@@ -24,12 +19,15 @@ const EntryItem = ({ id, entry, pickId }) => {
   );
 };
 
-const Entries = ({ space, id, pickId }) => {
+const Entries = ({ space, index, id, pickId }) => {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    getEntries(space).then(setEntries)
-  }, [space, id]);
+    (async () => {
+      const entries = await getEntries(space, index);
+      setEntries(entries);
+    })();
+  }, [space, index, id]);
 
   const listItems = entries
     .map(([id, entry]) => ({ key: id, id, entry, pickId }))

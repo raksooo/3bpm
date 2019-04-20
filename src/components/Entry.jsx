@@ -12,7 +12,7 @@ const EntryInput = ({ entry, name, props, setEntry }) => {
   return <Input {...inputProps} />;
 };
 
-const Entry = ({ entry: selectedEntry, saveEntry }) => {
+const Entry = ({ entry: selectedEntry, saveEntry, deleteEntry }) => {
   const [entry, setEntry] = useState({});
 
   useEffect(() => {
@@ -33,6 +33,11 @@ const Entry = ({ entry: selectedEntry, saveEntry }) => {
       <button onClick={saveLocalEntry}>
         Save
       </button>
+      {selectedEntry != null && (
+        <button onClick={deleteEntry}>
+          Delete
+        </button>
+      )}
     </>
   );
 };
