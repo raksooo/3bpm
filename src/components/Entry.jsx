@@ -35,7 +35,7 @@ const Entry = ({ entry: selectedEntry, saveEntry, deleteEntry }) => {
     .map(props => <EntryInput {...props} />);
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={e => e.preventDefault()}>
       {inputs}
       <div className={styles.buttons}>
         <button onClick={saveLocalEntry} className={styles.save}>
