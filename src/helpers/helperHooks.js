@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export const useEffectIf = (effect, dependencies = [], condition) => {
   return useEffect(() => {
@@ -28,5 +28,13 @@ export const useAsyncEffectIf = (effect, dependencies = [], condition) => {
       effect();
     }
   }, dependencies.concat([condition]));
+};
+
+export const useToggle = (initial = false) => {
+  const [state, setState] = useState(initial);
+
+  const toggle = useCallback(() => setState(!state), [state])
+
+  return [state, toggle];
 };
 

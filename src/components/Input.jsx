@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import PasswordInput from './PasswordInput';
 
 const Input = ({ type = "text", ...props }) => {
   const [value, setValue] = useState('');
@@ -20,6 +21,8 @@ const Input = ({ type = "text", ...props }) => {
 
   if (type === 'textarea') {
     return <textarea {...commonProps} />;
+  } else if (type === 'password') {
+    return <PasswordInput {...commonProps} />
   } else {
     return <input {...commonProps} type={type} />;
   }
