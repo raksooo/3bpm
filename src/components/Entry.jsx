@@ -21,10 +21,10 @@ const EntryInput = ({ entry, name, props, setEntry }) => {
 
 const Entry = ({ id, entry: selectedEntry, saveEntry, deleteEntry }) => {
   const [entry, setEntry] = useState({});
-
+  
   useEffect(() => { setEntry(selectedEntry); }, [selectedEntry]);
 
-  const saveLocalEntry = useCallback(() => saveEntry(selectedEntry));
+  const saveLocalEntry = useCallback(() => saveEntry(entry), [entry]);
 
   const inputs = Object.entries(entry)
     .map(([name, props]) => ({ key: name, entry, name, props, setEntry }))
@@ -34,7 +34,9 @@ const Entry = ({ id, entry: selectedEntry, saveEntry, deleteEntry }) => {
     <form className={styles.form} onSubmit={e => e.preventDefault()}>
       {inputs}
       <div className={styles.buttons}>
-        <button onClick={saveLocalEntry} className={styles.save}>
+        <button
+            onClick={saveLocalEntry}
+            className={styles.save}>
           Save
         </button>
         <button
