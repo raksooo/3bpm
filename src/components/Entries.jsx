@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import classNames from 'classnames';
 import { useAsyncEffect } from '../helpers/helperHooks';
+import { styleIf } from '../helpers/stylesHelper';
 
 import styles from '../styles/Entries.less';
 
@@ -19,7 +20,7 @@ const EntryItem = ({ id, entry, pickId, selected }) => {
   return (
     <li 
         onClick={onClick}
-        className={classNames(styles.item, selected && styles.selected)}>
+        className={classNames(styles.item, styleIf(selected, styles.selected))}>
       {entry.site.value}
     </li>
   );
@@ -29,8 +30,8 @@ const Entries = ({ space, index, id: selectedId, pickId }) => {
   const [entries, setEntries] = useState([]);
 
   useAsyncEffect(async () => {
-      const entries = await getEntries(space, index);
-      setEntries(entries);
+    const entries = await getEntries(space, index);
+    setEntries(entries);
   }, [space, index, selectedId]);
 
   const listItems = entries

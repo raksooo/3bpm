@@ -8,6 +8,7 @@ import Index from '../EntryIndex';
 import Header from './Header';
 import Entries from './Entries';
 import Entry from './Entry'
+import { styleIf } from '../helpers/stylesHelper';
 
 import styles from '../styles/Page.less';
 
@@ -23,13 +24,13 @@ const Page = (props) => {
   const [id, setId] = useState(null);
   const [entry, setEntry] = useState(defaultEntry());
   const index = useMemo(() => new Index(space), [space]);
-	const scrollContainer = useRef();
+  const scrollContainer = useRef();
 
   useEffect(() => {
     scrollContainer.current.scroll({
-			top: Math.round(window.innerHeight/2), 
-			behavior: 'smooth'
-		});
+      top: Math.round(window.innerHeight/2), 
+      behavior: 'smooth'
+    });
   }, [space]);
 
   const saveEntry = useCallback(async entry => {
@@ -69,7 +70,7 @@ const Page = (props) => {
             <section className={styles.leftSide}>
               <button
                   onClick={clearEntry}
-                  className={classNames(styles.add, id == null && styles.selected)}>
+                  className={classNames(styles.add, styleIf(id == null, styles.selected))}>
                 + New
               </button>
               <Entries space={space} index={index} id={id} pickId={pickId} />
