@@ -75,7 +75,11 @@ const Page = (props) => {
               <Entries space={space} index={index} id={id} pickId={pickId} />
             </section>
             <section className={styles.rightSide}>
-              <Entry entry={entry} saveEntry={saveEntry} deleteEntry={deleteEntry} />
+              <Entry
+                  id={id}
+                  entry={entry}
+                  saveEntry={saveEntry}
+                  deleteEntry={deleteEntry} />
             </section>
           </main>
         </div>

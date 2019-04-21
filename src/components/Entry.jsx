@@ -19,7 +19,7 @@ const EntryInput = ({ entry, name, props, setEntry }) => {
   return <Input {...inputProps} />;
 };
 
-const Entry = ({ entry: selectedEntry, saveEntry, deleteEntry }) => {
+const Entry = ({ id, entry: selectedEntry, saveEntry, deleteEntry }) => {
   const [entry, setEntry] = useState({});
 
   useEffect(() => { setEntry(selectedEntry); }, [selectedEntry]);
@@ -37,11 +37,12 @@ const Entry = ({ entry: selectedEntry, saveEntry, deleteEntry }) => {
         <button onClick={saveLocalEntry} className={styles.save}>
           Save
         </button>
-        {selectedEntry != null && (
-          <button onClick={deleteEntry} className={styles.delete}>
-            Delete
-          </button>
-        )}
+        <button
+            onClick={deleteEntry}
+            className={styles.delete}
+            disabled={id == null}>
+          Delete
+        </button>
       </div>
     </form>
   );
