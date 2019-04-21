@@ -1,3 +1,5 @@
+@import './button';
+
 .form {
   display: flex;
   flex-direction: column;
@@ -21,18 +23,14 @@
 }
 
 .button {
+  .normalizedButton;
+
   display: block;
   width: 50%;
   text-align: center;
   background: none;
   border: 1px transparent solid;
   line-height: 2em;
-  cursor: pointer;
-
-  &::-moz-focus-inner {
-    border: 0;
-    padding: 0;
-  }
 }
 
 .save {

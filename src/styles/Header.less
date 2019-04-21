@@ -1,3 +1,5 @@
+@import './button';
+
 .parallaxItem {
   display: flex;
   flex: 1 0 auto;
@@ -25,19 +27,15 @@
 }
 
 .authenticate {
+  .normalizedButton;
+
 	display: block;
 	margin-top: 20px;
 	padding: 1em 2em;
-	background: transparent;
 	border: 2px #4db6ac solid;
 	color: inherit;
 	font-size: 1.5em;
 	font-weight: bold;
-
-  &::-moz-focus-inner {
-    border: 0;
-    padding: 0;
-  }
 
 	&:hover {
 		background: #4db6ac;
