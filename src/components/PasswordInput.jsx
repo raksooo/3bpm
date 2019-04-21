@@ -4,6 +4,8 @@ import { useToggle } from '../helpers/helperHooks';
 
 import styles from '../styles/PasswordInput.less';
 
+import Eye from '../resources/eye.svg';
+
 const PasswordInput = (props) => {
   const [visible, toggleVisible] = useToggle();
   const type = visible ? 'text' : 'password';
@@ -14,9 +16,7 @@ const PasswordInput = (props) => {
         {...props}
         type={type}
         className={classNames(props.className, styles.input)} />
-      <span className={styles.toggleVisible} onClick={toggleVisible}>
-        👁
-      </span>
+      <Eye className={styles.toggleVisible} onClick={toggleVisible} />
     </div>
   );
 };
