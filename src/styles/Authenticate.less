@@ -1,0 +1,44 @@
+@import './button';
+
+.authenticate {
+  .normalizedButton;
+
+  display: block;
+  margin-top: 20px;
+  padding: 0;
+  width: 7em;
+  height: 3em;
+  border: 2px #4db6ac solid;
+  color: inherit;
+  font-size: 1.5em;
+  font-weight: bold;
+
+  transition: width 400ms linear;
+  transition+: border-top-color 400ms linear;
+  transition+: border-radius 100ms linear;
+
+  &:hover:not([disabled]) {
+    background: #4db6ac;
+  }
+
+  &:active:not([disabled]) {
+    background: #80cbc4;
+  }
+}
+
+.loading {
+  width: 3em;
+  border-radius: 50%;
+  border-top-color: white;
+  animation: rotate 1s infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
