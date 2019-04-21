@@ -4,6 +4,7 @@
   "description": "A decentralized password manager built on top of 3box",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
