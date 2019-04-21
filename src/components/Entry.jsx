@@ -22,13 +22,9 @@ const EntryInput = ({ entry, name, props, setEntry }) => {
 const Entry = ({ entry: selectedEntry, saveEntry, deleteEntry }) => {
   const [entry, setEntry] = useState({});
 
-  useEffect(() => {
-    setEntry(selectedEntry);
-  }, [selectedEntry]);
+  useEffect(() => { setEntry(selectedEntry); }, [selectedEntry]);
 
-  const saveLocalEntry = useCallback(() => {
-    saveEntry(selectedEntry);
-  });
+  const saveLocalEntry = useCallback(() => saveEntry(selectedEntry));
 
   const inputs = Object.entries(entry)
     .map(([name, props]) => ({ key: name, entry, name, props, setEntry }))

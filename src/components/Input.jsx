@@ -3,9 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 const Input = ({ type = "text", ...props }) => {
   const [value, setValue] = useState('');
 
-  useEffect(() => {
-    setValue(props.value);
-  }, [props.value])
+  useEffect(() => { setValue(props.value); }, [props.value])
 
   const onChange = useCallback(event => {
     setValue(event.target.value);

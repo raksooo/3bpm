@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import classNames from 'classnames';
+import { useAsyncEffect } from '../helpers/helperHooks';
 
 import styles from '../styles/Entries.less';
 
@@ -27,11 +28,9 @@ const EntryItem = ({ id, entry, pickId, selected }) => {
 const Entries = ({ space, index, id: selectedId, pickId }) => {
   const [entries, setEntries] = useState([]);
 
-  useEffect(() => {
-    (async () => {
+  useAsyncEffect(async () => {
       const entries = await getEntries(space, index);
       setEntries(entries);
-    })();
   }, [space, index, selectedId]);
 
   const listItems = entries
