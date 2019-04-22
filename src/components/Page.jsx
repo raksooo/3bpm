@@ -61,8 +61,13 @@ const Page = (props) => {
       .then(setEntry);
   });
 
+  const containerClassNames = classNames(
+    styles.parallaxContainer,
+    styleIf(space == null, styles.locked)
+  );
+
   return (
-    <div ref={scrollContainer} className={styles.parallaxContainer}>
+    <div ref={scrollContainer} className={containerClassNames}>
       <Header space={space} openSpace={openSpace} />
       { space != null && (
         <div className={styles.parallaxContent}>
