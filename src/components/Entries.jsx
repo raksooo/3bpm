@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
 import { useAsyncEffect } from '../helpers/helperHooks';
 import { styleIf } from '../helpers/stylesHelper';
@@ -29,10 +29,14 @@ const EntryItem = ({ id, entry, pickId, selected }) => {
 const Entries = ({ space, index, id: selectedId, pickId }) => {
   const [entries, setEntries] = useState([]);
 
-  useAsyncEffect(async () => {
+  const retrieveEntries = async () => {
     const entries = await getEntries(space, index);
     setEntries(entries);
-  }, [space, index, selectedId]);
+  };
+
+  useEffect(() => { setTimeout(retrieveEntries, 1000); }, [space, index]);
+
+  useAsyncEffect(retrieveEntries, [space, index, selectedId]);
 
   const listItems = entries
     .map(([id, entry]) => ({
