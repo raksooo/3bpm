@@ -7,7 +7,8 @@ import { SPACE_NAME } from '../constants';
 import Index from '../EntryIndex';
 import Header from './Header';
 import Entries from './Entries';
-import Entry from './Entry'
+import Entry from './Entry';
+import TopBar from './TopBar';
 import { styleIf } from '../helpers/stylesHelper';
 
 import styles from '../styles/Page.less';
@@ -67,30 +68,33 @@ const Page = (props) => {
   );
 
   return (
-    <div ref={scrollContainer} className={containerClassNames}>
-      <Header space={space} openSpace={openSpace} />
-      { space != null && (
-        <div className={styles.parallaxContent}>
-          <main className={styles.content}>
-            <section className={styles.leftSide}>
-              <button
-                  onClick={clearEntry}
-                  className={classNames(styles.add, styleIf(id == null, styles.selected))}>
-                + New
-              </button>
-              <Entries space={space} index={index} id={id} pickId={pickId} />
-            </section>
-            <section className={styles.rightSide}>
-              <Entry
-                  id={id}
-                  entry={entry}
-                  saveEntry={saveEntry}
-                  deleteEntry={deleteEntry} />
-            </section>
-          </main>
-        </div>
-      )}
-    </div>
+    <>
+      <div ref={scrollContainer} className={containerClassNames}>
+        <TopBar />
+        <Header space={space} openSpace={openSpace} />
+        { space != null && (
+          <div className={styles.parallaxContent}>
+            <main className={styles.content}>
+              <section className={styles.leftSide}>
+                <button
+                    onClick={clearEntry}
+                    className={classNames(styles.add, styleIf(id == null, styles.selected))}>
+                  + New
+                </button>
+                <Entries space={space} index={index} id={id} pickId={pickId} />
+              </section>
+              <section className={styles.rightSide}>
+                <Entry
+                    id={id}
+                    entry={entry}
+                    saveEntry={saveEntry}
+                    deleteEntry={deleteEntry} />
+              </section>
+            </main>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
