@@ -4,14 +4,8 @@ import { useAddress } from '3box-react-hooks';
 import styles from '../styles/TopBar.less';
 
 const TopBar = () => {
-  const address = useAddress();
-  const [_address, _setAddress] = useState();
+  //const address = useAddress();
 
-  if (address != _address) {
-    _setAddress(address);
-  }
-
-  console.log({ address })
   return (
     <div className={styles.topBar}>
       {/*address != null && (<threebox-address data-address={address} />)*/}
