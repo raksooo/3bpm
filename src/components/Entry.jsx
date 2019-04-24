@@ -21,7 +21,7 @@ const EntryInput = ({ entry, name, props, setEntry }) => {
 
 const Entry = ({ id, entry: selectedEntry, saveEntry, deleteEntry }) => {
   const [entry, setEntry] = useState({});
-  
+
   useEffect(() => { setEntry(selectedEntry); }, [selectedEntry]);
 
   const saveLocalEntry = useCallback(() => saveEntry(entry), [entry]);

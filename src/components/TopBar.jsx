@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useAddress } from '3box-react-hooks';
+import React from 'react';
+//import { useAddress } from '3box-react-hooks';
 
 import styles from '../styles/TopBar.less';
 

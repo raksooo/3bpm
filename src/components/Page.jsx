@@ -29,7 +29,7 @@ const Page = (props) => {
 
   useEffect(() => {
     scrollContainer.current.scroll({
-      top: Math.round(window.innerHeight/2), 
+      top: Math.round(window.innerHeight/2),
       behavior: 'smooth'
     });
   }, [space]);

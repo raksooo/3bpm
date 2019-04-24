@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { useProfile } from '3box-react-hooks';
 import { makeGenitive } from '../helpers/stringHelper';

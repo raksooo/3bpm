@@ -18,7 +18,7 @@ const EntryItem = ({ id, entry, pickId, selected }) => {
   }, [id, pickId]);
 
   return (
-    <li 
+    <li
         onClick={onClick}
         className={classNames(styles.item, styleIf(selected, styles.selected))}>
       {entry.site.value}
