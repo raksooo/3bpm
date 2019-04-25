@@ -38,3 +38,12 @@ export const useToggle = (initial = false) => {
   return [state, toggle];
 };
 
+export const useBool = (initial = false) => {
+  const [state, setState] = useState(initial);
+
+  const setTrue = useCallback(() => setState(true));
+  const setFalse = useCallback(() => setState(false));
+
+  return [state, setTrue, setFalse];
+};
+

@@ -6,12 +6,12 @@ import { opaqueIf } from '../helpers/stylesHelper';
 
 import styles from '../styles/Header.less';
 
-const Header = ({ space, openSpace }) => {
+const Header = ({ space, setSpace }) => {
   return (
     <header className={styles.header}>
       <h1 className={styles.brand}>3BPM</h1>
       <Profile space={space} />
-      <Authenticate space={space} openSpace={openSpace} />
+      <Authenticate setSpace={setSpace} />
     </header>
   );
 };

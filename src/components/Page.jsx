@@ -1,9 +1,7 @@
 import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
 import classNames from 'classnames';
-import { useDelayedSpace } from '3box-react-hooks';
 import uuid from 'uuid/v4';
 import { clone } from '../helpers/objectHelper';
-import { SPACE_NAME } from '../constants';
 import Index from '../EntryIndex';
 import Header from './Header';
 import Entries from './Entries';
@@ -21,7 +19,7 @@ const defaultEntry = () => clone({
 });
 
 const Page = (props) => {
-  const [space, openSpace] = useDelayedSpace(SPACE_NAME);
+  const [space, setSpace] = useState(null);
   const [id, setId] = useState(null);
   const [entry, setEntry] = useState(defaultEntry());
   const index = useMemo(() => new Index(space), [space]);
@@ -71,7 +69,7 @@ const Page = (props) => {
     <>
       <div ref={scrollContainer} className={containerClassNames}>
         <TopBar />
-        <Header space={space} openSpace={openSpace} />
+        <Header space={space} setSpace={setSpace} />
         { space != null && (
           <div className={styles.parallaxContent}>
             <main className={styles.content}>

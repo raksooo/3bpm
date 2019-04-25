@@ -29,14 +29,10 @@ const EntryItem = ({ id, entry, pickId, selected }) => {
 const Entries = ({ space, index, id: selectedId, pickId }) => {
   const [entries, setEntries] = useState([]);
 
-  const retrieveEntries = async () => {
+  useAsyncEffect(async () => {
     const entries = await getEntries(space, index);
     setEntries(entries);
-  };
-
-  useEffect(() => { setTimeout(retrieveEntries, 1000); }, [space, index]);
-
-  useAsyncEffect(retrieveEntries, [space, index, selectedId]);
+  }, [space, index, selectedId]);
 
   const listItems = entries
     .map(([id, entry]) => ({
